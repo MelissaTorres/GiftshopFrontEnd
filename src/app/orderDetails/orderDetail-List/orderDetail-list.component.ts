@@ -3,23 +3,23 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ComponentBase } from '../../common/component-base';
 import { PaginatedResult } from '../../common/models/paginated-result.model';
 import { PaginatedRequest } from '../../common/models/paginated-request.model';
-import { ProductsService } from '../services/products.service';
-import { Product } from '../../common/models/product.model';
+import { OrderDetailsService } from '../services/orderDetails.service';
+import { OrderDetail } from '../../common/models/orderDetail.model';
 import { MessageBoxService } from '../../core/services/message-box.service';
 import { ErrorHandlerService } from '../../core/services/error-handler.service';
 
 @Component({
-  selector: 'app-product-list',
-  templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.scss']
+  selector: 'app-orderDetail-list',
+  templateUrl: './orderDetail;-list.component.html',
+  styleUrls: ['./orderDetail-list.component.scss']
 })
-export class ProductListComponent extends ComponentBase implements OnInit, OnDestroy {
+export class OrderDetailListComponent extends ComponentBase implements OnInit, OnDestroy {
 
   private _paginatedRequest: PaginatedRequest = {};
-  page: PaginatedResult<Product>;
+  page: PaginatedResult<OrderDetail>;
 
   constructor(
-    private _productsService: ProductsService,
+    private _orderDetailsService: OrderDetailsService,
     private _messageBox: MessageBoxService,
     private _errorHandler: ErrorHandlerService) {
     super();
@@ -31,7 +31,7 @@ export class ProductListComponent extends ComponentBase implements OnInit, OnDes
 
   getPage(page: number) {
     this._paginatedRequest.page = page;
-    this.registerRequest(this._productsService.getPage(this._paginatedRequest))
+    this.registerRequest(this._orderDetailsService.getPage(this._paginatedRequest))
       .subscribe(response => {
         this.page = response;
       });
@@ -42,11 +42,11 @@ export class ProductListComponent extends ComponentBase implements OnInit, OnDes
     this.getPage(this._paginatedRequest.page);
   }
 
-  delete(product: Product) {
-    this._messageBox.confirm({ key: 'products.CONFIRM_DELETE', arg: { name: product.productName } }, 'products.DELETE')
+  delete(orderDetail: OrderDetail) {
+    this._messageBox.confirm({ key: 'orderDetails.CONFIRM_DELETE', arg: { name: orderDetail.id } }, 'orderDetails.DELETE')
       .subscribe((result: boolean) => {
         if (result) {
-          this._productsService.delete(product.id).subscribe(() => {
+          this._orderDetailsService.delete(orderDetail.id).subscribe(() => {
             this.getPage(1);
           }, error => this._errorHandler.handle(error));
         }

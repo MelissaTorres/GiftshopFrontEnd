@@ -33,4 +33,12 @@ export class OrdersService {
     save(model: Order): Observable<any> {
         return this._httpClient.post<any>(this._url, model);
     }
+
+    update(id: string, model: Order, ): Observable<any> {
+        return this._httpClient.put<any>(`${this._url}/${id}`, model);
+    }
+
+    delete(id: string): Observable<any> {
+        return this._httpClient.delete<any>(`${this._url}/${id}`);
+    }
 }
