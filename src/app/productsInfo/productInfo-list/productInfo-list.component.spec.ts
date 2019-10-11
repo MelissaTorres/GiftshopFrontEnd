@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OrderDetailListComponent } from './orderDetail-list.component';
+import { ProductInfoListComponent } from './productInfo-list.component';
 
-describe('OrderDetailListComponent', () => {
-  let component: OrderDetailListComponent;
-  let fixture: ComponentFixture<OrderDetailListComponent>;
+describe('ProductInfoListComponent', () => {
+  let component: ProductInfoListComponent;
+  let fixture: ComponentFixture<ProductInfoListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ OrderDetailListComponent ]
+      declarations: [ ProductInfoListComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(OrderDetailListComponent);
+    fixture = TestBed.createComponent(ProductInfoListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -22,4 +22,3 @@ describe('OrderDetailListComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-});
