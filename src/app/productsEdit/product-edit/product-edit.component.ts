@@ -1,24 +1,25 @@
 import { ComponentBase } from '../../common/component-base';
 import { PaginatedResult } from '../../common/models/paginated-result.model';
 import { PaginatedRequest } from '../../common/models/paginated-request.model';
-import { ProductsService } from '../services/products.service';
+import { ProductsEditService } from '../../productsEdit/services/productsEdit.service';
 import { Product } from '../../common/models/product.model';
 import { MessageBoxService } from '../../core/services/message-box.service';
 import { ErrorHandlerService } from '../../core/services/error-handler.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
+
 @Component({
-  selector: 'app-product-add',
-  templateUrl: './product-add.component.html',
-  styleUrls: ['./product-add.component.scss']
+  selector: 'app-product-list',
+  templateUrl: './product-edit.component.html',
+  styleUrls: ['./product-edit.component.scss']
 })
-export class ProductAddComponent extends ComponentBase implements OnInit, OnDestroy {
+export class ProductEditComponent extends ComponentBase implements OnInit, OnDestroy {
 
   private _paginatedRequest: PaginatedRequest = {};
   page: PaginatedResult<Product>;
 
   constructor(
-    private _productsService: ProductsService,
+    private _productsService: ProductsEditService,
     private _messageBox: MessageBoxService,
     private _errorHandler: ErrorHandlerService) {
     super();
@@ -41,7 +42,7 @@ export class ProductAddComponent extends ComponentBase implements OnInit, OnDest
     this.getPage(this._paginatedRequest.page);
   }
 
-  add(product: Product) {
-    this._productsService.save(product);
+  update(id: string, product: Product) {
+    this._productsService.update(id, product);
   }
 }

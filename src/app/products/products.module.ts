@@ -7,7 +7,7 @@ import { ProductsService } from './services/products.service';
 
 @NgModule({
   declarations: [
-    ProductListComponent,
+    ProductListComponent
   ],
   imports: [
     SharedModule,
@@ -16,4 +16,4 @@ import { ProductsService } from './services/products.service';
   providers: [ProductsService],
   entryComponents: []
 })
-export class ProductsModuule { }
+export class ProductsModule { }

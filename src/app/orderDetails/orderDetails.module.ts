@@ -7,7 +7,7 @@ import { OrderDetailsService } from './services/orderDetails.service';
 
 @NgModule({
   declarations: [
-    OrderDetailListComponent,
+    OrderDetailListComponent
   ],
   imports: [
     SharedModule,
