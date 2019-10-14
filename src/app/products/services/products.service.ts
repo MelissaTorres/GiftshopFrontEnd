@@ -34,7 +34,7 @@ export class ProductsService {
         return this._httpClient.post<any>(this._url, model);
     }
 
-    update(id: string, model: Product, ): Observable<any> {
+    update(id: string, model: Product ): Observable<any> {
         return this._httpClient.put<any>(`${this._url}/${id}`, model);
     }
 

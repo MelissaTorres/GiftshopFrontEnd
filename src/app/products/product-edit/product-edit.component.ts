@@ -1,6 +1,3 @@
-import { UpdateProduct } from './../../common/models/updateProduct.model';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-
 import { ComponentBase } from '../../common/component-base';
 import { PaginatedResult } from '../../common/models/paginated-result.model';
 import { PaginatedRequest } from '../../common/models/paginated-request.model';
@@ -8,13 +5,14 @@ import { ProductsService } from '../services/products.service';
 import { Product } from '../../common/models/product.model';
 import { MessageBoxService } from '../../core/services/message-box.service';
 import { ErrorHandlerService } from '../../core/services/error-handler.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss']
 })
-export class ProductListComponent extends ComponentBase implements OnInit, OnDestroy {
+export class ProductEditComponent extends ComponentBase implements OnInit, OnDestroy {
 
   private _paginatedRequest: PaginatedRequest = {};
   page: PaginatedResult<Product>;
@@ -43,14 +41,7 @@ export class ProductListComponent extends ComponentBase implements OnInit, OnDes
     this.getPage(this._paginatedRequest.page);
   }
 
-  delete(product: Product) {
-    this._messageBox.confirm({ key: 'products.CONFIRM_DELETE', arg: { name: product.productName } }, 'products.DELETE')
-      .subscribe((result: boolean) => {
-        if (result) {
-          this._productsService.delete(product.id).subscribe(() => {
-            this.getPage(1);
-          }, error => this._errorHandler.handle(error));
-        }
-      });
+  update(id: string, product: Product) {
+    this._productsService.update(id, product);
   }
 }
