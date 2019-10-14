@@ -7,7 +7,7 @@ import { ProductsService } from './services/products.service';
 
 @NgModule({
   declarations: [
-    ProductListComponent
+    ProductListComponent,
   ],
   imports: [
     SharedModule,

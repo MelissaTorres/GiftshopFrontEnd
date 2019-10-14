@@ -8,6 +8,7 @@ import { ErrorComponent } from './error/error.component';
 import { HomeComponent } from './home/home.component';
 import { MainComponent } from './main/main.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +19,7 @@ import { MainComponent } from './main/main.component';
   imports: [
     AppRoutingModule,
     CoreModule,
-    SharedModule
+    SharedModule 
   ],
   providers: [],
   bootstrap: [AppComponent]
