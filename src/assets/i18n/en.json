@@ -88,5 +88,20 @@
     "EDIT": "Edit Example",
     "DELETE": "Delete Example",
     "CONFIRM_DELETE": "Are you sure you want to delete the example {{name}}?"
+  },
+  "products": {
+    "$TITLE": "Products Catalog",
+    "PRODUCTNAME": "Product Name",
+    "DESCRIPTION": "Description",
+    "PRICE": "Price",
+    "ADD": "Add Product",
+    "EDIT": "Edit Product",
+    "DELETE": "Delete Product",
+    "CONFIRM_DELETE": "Are you sure you want to delete the product {{productName}}?"
+  },
+  "productsIndex": {
+    "$TITLE": "Products",
+    "PRODUCTNAME": "Product Name",
+    "PRICE": "Price"
   }
 }

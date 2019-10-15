@@ -6,7 +6,7 @@ export interface Product {
     description: string;
     characteristics: string;
     price: number;
-    //category: Category;
-    //categoryId: string;
+    category: Category;
+    categoryId: string;
   }
   

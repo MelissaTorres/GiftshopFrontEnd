@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { ComponentBase } from '../../common/component-base';
 import { PaginatedResult } from '../../common/models/paginated-result.model';
@@ -7,7 +7,6 @@ import { ExamplesService } from '../services/examples.service';
 import { Example } from '../../common/models/example.model';
 import { MessageBoxService } from '../../core/services/message-box.service';
 import { ErrorHandlerService } from '../../core/services/error-handler.service';
-import {MatPaginator} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-example-list',
@@ -18,7 +17,6 @@ export class ExampleListComponent extends ComponentBase implements OnInit, OnDes
 
   private _paginatedRequest: PaginatedRequest = {};
   page: PaginatedResult<Example>;
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
 
   constructor(

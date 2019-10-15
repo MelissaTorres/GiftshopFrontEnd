@@ -12,7 +12,8 @@ export class MainComponent {
 
   navItems: NavItem[] = [
     { name: 'examples.$TITLE', route: ['/examples'] },
-    {name: 'products.$TITLE', route: '/products'}
+    { name: 'productsIndex.$TITLE', route: ['/productsIndex']},
+    { name: 'products.$TITLE', route: ['/products'] }
   ];
 
   constructor(private _authService: AuthService) { }

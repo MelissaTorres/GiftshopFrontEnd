@@ -1,4 +1,4 @@
-import { UpdateProduct } from './../../common/models/updateProduct.model';
+//import { UpdateProduct } from './../../common/models/updateProduct.model';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { ComponentBase } from '../../common/component-base';
@@ -44,12 +44,13 @@ export class ProductListComponent extends ComponentBase implements OnInit, OnDes
   }
 
   delete(product: Product) {
-    this._messageBox.confirm({ key: 'products.CONFIRM_DELETE', arg: { name: product.productName } }, 'products.DELETE')
+    this._messageBox.confirm({ key: 'products.CONFIRM_DELETE', arg: { productName: product.productName } }, 'products.DELETE')
       .subscribe((result: boolean) => {
         if (result) {
-          this._productsService.delete(product.id).subscribe(() => {
-            this.getPage(1);
-          }, error => this._errorHandler.handle(error));
+          this._productsService.delete(product.id)
+            .subscribe(() => {
+              this.getPage(1);
+            }, error => this._errorHandler.handle(error));
         }
       });
   }
