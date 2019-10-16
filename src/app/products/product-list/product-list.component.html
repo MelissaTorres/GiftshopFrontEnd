@@ -24,7 +24,7 @@
               <i class="far fa-trash-alt"></i>
               {{ 'app.REMOVE' | translate }}
             </button>
-            <a [routerLink]="['./editProduct']" 
+            <a [routerLink]="['./editProduct/', item.id]" 
             class="btn btn-info">
               <i class="fas fa-pencil-alt"></i>
               {{ 'app.EDIT' | translate }}

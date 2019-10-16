@@ -51,6 +51,15 @@ const routes: Routes = [
         data: {
           title: 'products.$TITLE'
         }
+      }, 
+      {
+        //path: 'products/editProduct/0b7d5f48-f328-4085-ecea-08d751ba3997',
+        path: 'products/editProduct/:id',
+        component: LayoutComponent,
+        loadChildren: './prodsEdit/prodsEdit.module#ProdsEditModule',
+        data: {
+          title: 'products.$TITLE'
+        }
       }
     ]
   },

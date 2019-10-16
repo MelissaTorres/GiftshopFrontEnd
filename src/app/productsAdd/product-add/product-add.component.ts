@@ -42,8 +42,7 @@ export class ProductAddComponent extends ComponentBase implements OnInit, OnDest
   }
 
   onSubmit() {
-    this.add();
-    
+    this.add();  
   }
 
   getPage(page: number) {
