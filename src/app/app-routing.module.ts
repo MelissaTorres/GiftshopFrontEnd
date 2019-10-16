@@ -43,6 +43,14 @@ const routes: Routes = [
         data: {
           title: 'products.$TITLE'
         }
+      },
+      {
+        path: 'products/addProduct',
+        component: LayoutComponent,
+        loadChildren: './productsAdd/productsAdd.module#ProductsAddModule',
+        data: {
+          title: 'products.$TITLE'
+        }
       }
     ]
   },

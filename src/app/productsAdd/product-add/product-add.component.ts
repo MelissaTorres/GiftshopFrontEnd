@@ -6,6 +6,9 @@ import { Product } from '../../common/models/product.model';
 import { MessageBoxService } from '../../core/services/message-box.service';
 import { ErrorHandlerService } from '../../core/services/error-handler.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { RouterLink, Router } from '@angular/router';
+import { ProductInfoListComponent } from 'src/app/productsInfo/productInfo-list/productInfo-list.component';
 
 @Component({
   selector: 'app-product-add',
@@ -16,8 +19,11 @@ export class ProductAddComponent extends ComponentBase implements OnInit, OnDest
 
   private _paginatedRequest: PaginatedRequest = {};
   page: PaginatedResult<Product>;
+  addForm: FormGroup;
 
   constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
     private _productsService: ProductsAddService,
     private _messageBox: MessageBoxService,
     private _errorHandler: ErrorHandlerService) {
@@ -26,6 +32,18 @@ export class ProductAddComponent extends ComponentBase implements OnInit, OnDest
 
   ngOnInit() {
     this.getPage(1);
+    this.addForm = this.formBuilder.group({
+      productName: [''],
+      description: [''],
+      characteristics: [''],
+      price: [''],
+      categoryId: ['']
+    });
+  }
+
+  onSubmit() {
+    this.add();
+    
   }
 
   getPage(page: number) {
@@ -41,7 +59,17 @@ export class ProductAddComponent extends ComponentBase implements OnInit, OnDest
     this.getPage(this._paginatedRequest.page);
   }
 
-  add(product: Product) {
-    this._productsService.save(product);
+  add() {
+    var product = new Product();
+    product.productName = this.addForm.value.productName;
+    product.description = this.addForm.value.description;
+    product.characteristics = this.addForm.value.characteristics;
+    product.price = this.addForm.value.price;
+    product.categoryId = this.addForm.value.categoryId;
+    this._productsService.save(product).subscribe(response => {
+      var res = response;
+      this.router.navigate(['products'])
+    });
   }
 }
+

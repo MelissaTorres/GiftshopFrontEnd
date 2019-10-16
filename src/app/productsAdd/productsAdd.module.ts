@@ -2,8 +2,9 @@ import { NgModule } from '@angular/core';
 
 import { SharedModule } from '../shared/shared.module';
 import { ProductsAddRoutingModule } from './productAdd-routing.module';
-import { ProductAddComponent } from './../productsAdd/product-add/product-add.component';
+import { ProductAddComponent } from './product-add/product-add.component';
 import { ProductsAddService } from './services/productsAdd.service';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -11,7 +12,8 @@ import { ProductsAddService } from './services/productsAdd.service';
   ],
   imports: [
     SharedModule,
-    ProductsAddRoutingModule
+    ProductsAddRoutingModule,
+    FormsModule
   ],
   providers: [ProductsAddService],
   entryComponents: []

@@ -18,7 +18,7 @@ export class ProductsAddService {
         private _httpClient: HttpClient,
         @Inject(API_URL) apiUrl: string,
         @Inject(ASSETS_URL) assetsUrl: string) {
-        this._url = `${apiUrl}/api/productsAdd`;
+        this._url = `${apiUrl}/api/products`;
     }
 
     getPage(query: PaginatedRequest): Observable<PaginatedResult<Product>> {
@@ -32,13 +32,5 @@ export class ProductsAddService {
 
     save(model: Product): Observable<any> {
         return this._httpClient.post<any>(this._url, model);
-    }
-
-    update(id: string, model: Product ): Observable<any> {
-        return this._httpClient.put<any>(`${this._url}/${id}`, model);
-    }
-
-    delete(id: string): Observable<any> {
-        return this._httpClient.delete<any>(`${this._url}/${id}`);
     }
 }

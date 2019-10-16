@@ -1,4 +1,3 @@
-//import { UpdateProduct } from './../../common/models/updateProduct.model';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { ComponentBase } from '../../common/component-base';
@@ -6,7 +5,6 @@ import { PaginatedResult } from '../../common/models/paginated-result.model';
 import { PaginatedRequest } from '../../common/models/paginated-request.model';
 import { Product } from '../../common/models/product.model';
 import { ProductsIndexService } from '../services/producstIndex.service';
-
 
 @Component({
   selector: 'app-productIndex-list',

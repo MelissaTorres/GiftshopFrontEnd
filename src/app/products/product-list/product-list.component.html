@@ -1,5 +1,5 @@
 <div class="py-md-3">
-  <a class="btn btn-primary btn-lg" [routerLink]="['./add']">
+  <a class="btn btn-primary btn-lg" [routerLink]="['./addProduct']">
     {{ 'app.NEW' | translate }}
   </a>
 </div>
@@ -24,7 +24,8 @@
               <i class="far fa-trash-alt"></i>
               {{ 'app.REMOVE' | translate }}
             </button>
-            <a [routerLink]="['./', item.id, 'edit']" class="btn btn-info">
+            <a [routerLink]="['./editProduct']" 
+            class="btn btn-info">
               <i class="fas fa-pencil-alt"></i>
               {{ 'app.EDIT' | translate }}
             </a>

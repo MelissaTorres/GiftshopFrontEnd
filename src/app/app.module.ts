@@ -7,7 +7,7 @@ import { SharedModule } from './shared/shared.module';
 import { ErrorComponent } from './error/error.component';
 import { HomeComponent } from './home/home.component';
 import { MainComponent } from './main/main.component';
-
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,8 @@ import { MainComponent } from './main/main.component';
   imports: [
     AppRoutingModule,
     CoreModule,
-    SharedModule 
+    SharedModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
