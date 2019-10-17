@@ -3,22 +3,21 @@
     <div class="form-group">
         <label for="productName">Product Name</label>
         <input type="text" class="form-control" id="productName" placeholder="Product Name"
-        formControlName="productName">
+            formControlName="productName">
     </div>
     <div class="form-group">
         <label for="description">Description</label>
         <input type="text" class="form-control" id="description" placeholder="Description"
-        formControlName="description">
+            formControlName="description">
     </div>
     <div class="form-group">
         <label for="characteristics">Characteristics</label>
         <input type="text" class="form-control" id="description" placeholder="Characteristics"
-        formControlName="characteristics">
+            formControlName="characteristics">
     </div>
     <div class="form-group">
         <label for="price">Price</label>
-        <input type="number" class="form-control" id="price" placeholder="Price"
-        formControlName="price">
+        <input type="number" class="form-control" id="price" placeholder="Price"  formControlName="price">
     </div>
     <!--
     <div class="form-group">
@@ -28,8 +27,15 @@
     -->
     <div class="form-group">
         <label for="categoryId">Category ID</label>
-        <input type="text" class="form-control" id="categoryId" placeholder="Category ID"
-        formControlName="categoryId">
+        <input type="text" class="form-control" id="categoryId" placeholder="Category ID" formControlName="categoryId">
+        <!--
+        <div class="dropdown">
+            <button class="btn dropdown-toggle" type="button" id="categoryId"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                formControlName='categoryId'>
+            </button>
+        </div>
+        -->
     </div>
     <button class="btn btn-success">Add</button>
 </form>

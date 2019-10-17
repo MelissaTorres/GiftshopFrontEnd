@@ -8,17 +8,20 @@ import { ASSETS_URL } from '../../core/assets-url.token';
 import { PaginatedRequest } from '../../common/models/paginated-request.model';
 import { PaginatedResult } from '../../common/models/paginated-result.model';
 import { Product } from '../../common/models/product.model';
+import { Category } from '../../common/models/category.model';
 
 @Injectable()
 export class ProductsAddService {
 
     private readonly _url: string;
+    private readonly _urlCat: string;
 
     constructor(
         private _httpClient: HttpClient,
         @Inject(API_URL) apiUrl: string,
         @Inject(ASSETS_URL) assetsUrl: string) {
         this._url = `${apiUrl}/api/products`;
+        this._urlCat = this._url + `/getCategories`;
     }
 
     getPage(query: PaginatedRequest): Observable<PaginatedResult<Product>> {
@@ -32,5 +35,9 @@ export class ProductsAddService {
 
     save(model: Product): Observable<any> {
         return this._httpClient.post<any>(this._url, model);
+    }
+
+    getCategories(): Observable<any> {
+        return this._httpClient.get<any>(this._urlCat);
     }
 }

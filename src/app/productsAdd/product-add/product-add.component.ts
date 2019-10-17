@@ -33,12 +33,18 @@ export class ProductAddComponent extends ComponentBase implements OnInit, OnDest
   ngOnInit() {
     this.getPage(1);
     this.addForm = this.formBuilder.group({
-      productName: [''],
+      productName: ['', ],
       description: [''],
       characteristics: [''],
-      price: [''],
+      price: ['', Validators.required, Validators.maxLength(12), Validators.minLength(1)],
       categoryId: ['']
     });
+    //this._productsService.getCategories().subscribe(response => {
+    //  var res = response;
+    //  res.forEach(element => {
+    //    console.log(element);
+    //  });
+    //});
   }
 
   onSubmit() {
@@ -51,11 +57,6 @@ export class ProductAddComponent extends ComponentBase implements OnInit, OnDest
       .subscribe(response => {
         this.page = response;
       });
-  }
-
-  sort(value: string) {
-    this._paginatedRequest.orderBy = value;
-    this.getPage(this._paginatedRequest.page);
   }
 
   add() {

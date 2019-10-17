@@ -4,12 +4,10 @@
       {{ 'app.PAGE_INFO' | translate: { from: from, to: to, total: page.total } }}
     </div>
     <div [hidden]="page.totalPages &lt; 2">
-      <!--
-      <ngb-pagination [collectionSize]="page.total" [(page)]="page.current" (pageSize)="15"
-        (pageChange)="pageChange.emit($event)" [maxSize]="15" [boundaryLinks]="true" [PageSizeOptions]="[5, 10, 15]"></ngb-pagination>
-      -->
-      <ngb-pagination [collectionSize]="page.total" [(page)]="page.current" (pageSize)="page.pageSize"
-        (pageChange)="pageChange.emit($event)" [maxSize]="5" [boundaryLinks]="true"></ngb-pagination>
+      <ngb-pagination 
+      [collectionSize]="page.total" [(page)]="page.current" (pageSize)="page.pageSize"
+        (pageChange)="pageChange.emit($event)" [maxSize]="10" [boundaryLinks]="true"
+        ></ngb-pagination>
     </div>
   </div>
 </div>

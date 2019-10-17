@@ -24,10 +24,13 @@
               <i class="far fa-trash-alt"></i>
               {{ 'app.REMOVE' | translate }}
             </button>
-            <a [routerLink]="['./editProduct/', item.id]" 
-            class="btn btn-info">
+            <a [routerLink]="['./editProduct/', item.id]" class="btn btn-info">
               <i class="fas fa-pencil-alt"></i>
               {{ 'app.EDIT' | translate }}
+            </a>
+            <a [routerLink]="['./productInfo/', item.id]" class="btn btn-info">
+              <i class="far fa-question-circle"></i>
+              Info
             </a>
           </td>
         </tr>

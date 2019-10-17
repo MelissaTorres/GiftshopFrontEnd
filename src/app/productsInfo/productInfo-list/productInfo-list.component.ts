@@ -7,6 +7,8 @@ import { ProductsInfoService } from '../services/productsInfo.service';
 import { Product } from '../../common/models/product.model';
 import { MessageBoxService } from '../../core/services/message-box.service';
 import { ErrorHandlerService } from '../../core/services/error-handler.service';
+import { FormBuilder } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-productInfo-list',
@@ -16,9 +18,13 @@ import { ErrorHandlerService } from '../../core/services/error-handler.service';
 export class ProductInfoListComponent extends ComponentBase implements OnInit, OnDestroy {
 
   private _paginatedRequest: PaginatedRequest = {};
+  product: Product;
   page: PaginatedResult<Product>;
 
   constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private actRoute: ActivatedRoute,
     private _productsInfoService: ProductsInfoService,
     private _messageBox: MessageBoxService,
     private _errorHandler: ErrorHandlerService) {
@@ -26,7 +32,9 @@ export class ProductInfoListComponent extends ComponentBase implements OnInit, O
   }
 
   ngOnInit() {
-    this.getPage(1);
+    this._productsInfoService.get(this.actRoute.snapshot.params.id).subscribe(response => {
+      this.product = response;
+    })
   }
 
   getPage(page: number) {
@@ -34,22 +42,6 @@ export class ProductInfoListComponent extends ComponentBase implements OnInit, O
     this.registerRequest(this._productsInfoService.getPage(this._paginatedRequest))
       .subscribe(response => {
         this.page = response;
-      });
-  }
-
-  sort(value: string) {
-    this._paginatedRequest.orderBy = value;
-    this.getPage(this._paginatedRequest.page);
-  }
-
-  delete(product: Product) {
-    this._messageBox.confirm({ key: 'productsInfo.CONFIRM_DELETE', arg: { name: product.productName } }, 'productsInfo.DELETE')
-      .subscribe((result: boolean) => {
-        if (result) {
-          this._productsInfoService.delete(product.id).subscribe(() => {
-            this.getPage(1);
-          }, error => this._errorHandler.handle(error));
-        }
       });
   }
 }
