@@ -18,6 +18,7 @@ export class ProductListComponent extends ComponentBase implements OnInit, OnDes
 
   private _paginatedRequest: PaginatedRequest = {};
   page: PaginatedResult<Product>;
+  productName: string;
 
   constructor(
     private _productsService: ProductsService,
@@ -53,5 +54,14 @@ export class ProductListComponent extends ComponentBase implements OnInit, OnDes
             }, error => this._errorHandler.handle(error));
         }
       });
+  }
+
+  search() {
+    this._paginatedRequest.term = this.productName;
+    this.registerRequest(this._productsService.getPage(this._paginatedRequest))
+      .subscribe(response => {
+        this.page = response;
+        this.getPage(1);
+      })
   }
 }
