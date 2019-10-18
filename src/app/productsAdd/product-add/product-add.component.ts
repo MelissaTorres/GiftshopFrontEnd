@@ -9,6 +9,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { RouterLink, Router } from '@angular/router';
 import { ProductInfoListComponent } from 'src/app/productsInfo/productInfo-list/productInfo-list.component';
+import { Category } from '../../common/models/category.model';
 
 @Component({
   selector: 'app-product-add',
@@ -19,7 +20,10 @@ export class ProductAddComponent extends ComponentBase implements OnInit, OnDest
 
   private _paginatedRequest: PaginatedRequest = {};
   page: PaginatedResult<Product>;
+  pageCat: PaginatedResult<Category>;
   addForm: FormGroup;
+  productName: string;
+  categoryName: string; 
 
   constructor(
     private formBuilder: FormBuilder,
@@ -39,12 +43,6 @@ export class ProductAddComponent extends ComponentBase implements OnInit, OnDest
       price: ['', Validators.required, Validators.maxLength(12), Validators.minLength(1)],
       categoryId: ['']
     });
-    //this._productsService.getCategories().subscribe(response => {
-    //  var res = response;
-    //  res.forEach(element => {
-    //    console.log(element);
-    //  });
-    //});
   }
 
   onSubmit() {

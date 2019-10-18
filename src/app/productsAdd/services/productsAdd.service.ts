@@ -37,7 +37,7 @@ export class ProductsAddService {
         return this._httpClient.post<any>(this._url, model);
     }
 
-    getCategories(): Observable<any> {
-        return this._httpClient.get<any>(this._urlCat);
+    getCategories() {
+        return this._httpClient.get(this._urlCat);
     }
 }
