@@ -13,12 +13,14 @@ import { Product } from '../../common/models/product.model';
 export class ProdsEditService {
 
     private readonly _url: string;
+    private readonly _urlCat: string;
 
     constructor(
         private _httpClient: HttpClient,
         @Inject(API_URL) apiUrl: string,
         @Inject(ASSETS_URL) assetsUrl: string) {
         this._url = `${apiUrl}/api/products`;
+        this._urlCat = this._url + `/getCategories`;
     }
 
     get(id: string): Observable<Product> {
@@ -29,4 +31,7 @@ export class ProdsEditService {
         return this._httpClient.put<any>(`${this._url}/${id}`, model);
     }
 
+    getCategories() {
+        return this._httpClient.get(this._urlCat);
+    }
 }

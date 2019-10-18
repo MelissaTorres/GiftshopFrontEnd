@@ -21,7 +21,7 @@ export class ProdEditComponent extends ComponentBase implements OnInit, OnDestro
     page: PaginatedResult<Product>;
     product: Product;
     editForm: FormGroup;
-    
+    categoryNames;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -30,6 +30,7 @@ export class ProdEditComponent extends ComponentBase implements OnInit, OnDestro
         private _productsService: ProdsEditService,
         private _messageBox: MessageBoxService,
         private _errorHandler: ErrorHandlerService
+
     ) {
         super();
     }
@@ -45,23 +46,30 @@ export class ProdEditComponent extends ComponentBase implements OnInit, OnDestro
             characteristics: [''],
             price: [''],
             categoryId: ['']
-          });
+        });
+        this.getCategories();
     }
 
     onSubmit() {
         this.update(this.actRoute.snapshot.params.id);
     }
 
-    update(id: string) {  
+    update(id: string) {
         this.product.id = id;
         this.product.productName = this.editForm.value.productName;
         this.product.description = this.editForm.value.description;
         this.product.characteristics = this.editForm.value.characteristics;
         this.product.price = this.editForm.value.price;
-        this.product.categoryId = this.editForm.value.categoryId;      
+        this.product.categoryId = this.editForm.value.categoryId;
         this._productsService.update(id, this.product).subscribe(response => {
             var res = response;
             this.router.navigate(['products'])
         })
+    }
+
+    getCategories() {
+        this._productsService.getCategories().subscribe(response => {
+            this.categoryNames = response;
+        });
     }
 }

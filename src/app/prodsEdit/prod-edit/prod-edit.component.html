@@ -2,23 +2,23 @@
 <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
         <label for="productName">Product Name</label>
-        <input type="text" class="form-control" id="productName" placeholder="Product Name" ngModel="{{product.productName}}"
-        formControlName="productName">
+        <input type="text" class="form-control" id="productName" placeholder="Product Name"
+            ngModel="{{product.productName}}" formControlName="productName">
     </div>
     <div class="form-group">
         <label for="description">Description</label>
-        <input type="text" class="form-control" id="description" placeholder="Description" ngModel="{{product.description}}"
-        formControlName="description">
+        <input type="text" class="form-control" id="description" placeholder="Description"
+            ngModel="{{product.description}}" formControlName="description">
     </div>
     <div class="form-group">
         <label for="characteristics">Characteristics</label>
-        <input type="text" class="form-control" id="characteristics" placeholder="Characteristics" ngModel="{{product.characteristics}}"
-        formControlName="characteristics">
+        <input type="text" class="form-control" id="characteristics" placeholder="Characteristics"
+            ngModel="{{product.characteristics}}" formControlName="characteristics">
     </div>
     <div class="form-group">
         <label for="price">Price</label>
-        <input type="number" class="form-control" id="price" placeholder="Price"  ngModel="{{product.price}}"
-        formControlName="price">
+        <input type="number" class="form-control" id="price" placeholder="Price" ngModel="{{product.price}}"
+            formControlName="price">
     </div>
     <!--
     <div class="form-group">
@@ -26,10 +26,20 @@
         <input type="text" class="form-control" id="category" placeholder="Category" [(ngModel)]="product.category">
     </div>
     -->
-    <div class="form-group">
+    <!-- 
+<div class="form-group">
         <label for="categoryId">Category ID</label>
         <input type="text" class="form-control" id="categoryId" placeholder="Category ID" ngModel="{{product.categoryId}}"
         formControlName="categoryId">
+    </div>
+    -->
+    <div class="form-group">
+        <label for="categoryId">Select list:</label>
+        <select class="form-control" id="categoryId" aria-placeholder="Category Name" formControlName="categoryId">
+            <option *ngFor="let category of categoryNames; let i = index" [value]="categoryNames[i].id" selected={{product.categoryId}}>
+                {{categoryNames[i].categoryName}}
+            </option>
+        </select>
     </div>
     <button class="btn btn-primary">Edit</button>
 </form>
