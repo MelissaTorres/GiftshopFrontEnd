@@ -23,7 +23,7 @@ export class ProductAddComponent extends ComponentBase implements OnInit, OnDest
   pageCat: PaginatedResult<Category>;
   addForm: FormGroup;
   productName: string;
-  categoryName: string; 
+  categoryNames;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -37,16 +37,17 @@ export class ProductAddComponent extends ComponentBase implements OnInit, OnDest
   ngOnInit() {
     this.getPage(1);
     this.addForm = this.formBuilder.group({
-      productName: ['', ],
+      productName: ['',],
       description: [''],
       characteristics: [''],
       price: ['', Validators.required, Validators.maxLength(12), Validators.minLength(1)],
-      categoryId: ['']
+      categoryId: ['', Validators.required]
     });
+    this.getCategories();
   }
 
   onSubmit() {
-    this.add();  
+    this.add();
   }
 
   getPage(page: number) {
@@ -67,6 +68,12 @@ export class ProductAddComponent extends ComponentBase implements OnInit, OnDest
     this._productsService.save(product).subscribe(response => {
       var res = response;
       this.router.navigate(['products'])
+    });
+  }
+
+  getCategories() {
+    this._productsService.getCategories().subscribe(response => {
+      this.categoryNames = response;
     });
   }
 }

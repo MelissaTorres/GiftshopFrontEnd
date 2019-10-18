@@ -25,9 +25,13 @@
         <input type="text" class="form-control" id="category" placeholder="Category" [(ngModel)]="product.category">
     </div>
     -->
+<!-- 
     <div class="form-group">
         <label for="categoryId">Category ID</label>
         <input type="text" class="form-control" id="categoryId" placeholder="Category ID" formControlName="categoryId">
+            </div>
+
+-->
         <!--
         <div class="dropdown">
             <button class="btn dropdown-toggle" type="button" id="categoryId"
@@ -36,6 +40,13 @@
             </button>
         </div>
         -->
-    </div>
+    <div class="form-group">
+        <label for="categoryId">Select list:</label>
+        <select class="form-control" id="categoryId" aria-placeholder="Category Name" formControlName="categoryId">
+            <option *ngFor="let category of categoryNames; let i = index" [value]="categoryNames[i].id">
+                {{categoryNames[i].categoryName}}
+            </option>
+        </select>
+      </div>
     <button class="btn btn-success">Add</button>
 </form>
