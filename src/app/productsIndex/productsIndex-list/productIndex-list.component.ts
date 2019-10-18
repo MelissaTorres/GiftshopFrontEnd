@@ -5,6 +5,7 @@ import { PaginatedResult } from '../../common/models/paginated-result.model';
 import { PaginatedRequest } from '../../common/models/paginated-request.model';
 import { Product } from '../../common/models/product.model';
 import { ProductsIndexService } from '../services/producstIndex.service';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-productIndex-list',
@@ -15,6 +16,7 @@ export class ProductIndexListComponent extends ComponentBase implements OnInit, 
 
   private _paginatedRequest: PaginatedRequest = {};
   page: PaginatedResult<Product>;
+  productName: string;
 
   constructor(
     private _productsService: ProductsIndexService) {
@@ -36,5 +38,14 @@ export class ProductIndexListComponent extends ComponentBase implements OnInit, 
   sort(value: string) {
     this._paginatedRequest.orderBy = value;
     this.getPage(this._paginatedRequest.page);
+  }
+
+  search() {
+    this._paginatedRequest.term = this.productName;
+    this.registerRequest(this._productsService.getPage(this._paginatedRequest))
+    .subscribe(response => {
+      this.page = response;
+      this.getPage(1);
+    })
   }
 }

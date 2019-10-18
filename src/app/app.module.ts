@@ -8,6 +8,13 @@ import { ErrorComponent } from './error/error.component';
 import { HomeComponent } from './home/home.component';
 import { MainComponent } from './main/main.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import {
+  MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,
+  MatSortModule, MatTableModule
+} from "@angular/material";
 
 @NgModule({
   declarations: [
@@ -21,7 +28,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CoreModule,
     SharedModule,
     FormsModule,
-    ReactiveFormsModule 
+    ReactiveFormsModule, 
+    BrowserModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

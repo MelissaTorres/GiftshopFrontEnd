@@ -68,6 +68,14 @@ const routes: Routes = [
         data: {
           title: 'products.$TITLE'
         }
+      },
+      {
+        path: 'productsIndex/productInfo/:id',
+        component: LayoutComponent,
+        loadChildren: './productsInfo/productsInfo.module#ProductsInfoModule',
+        data: {
+          title: 'products.$TITLE'
+        }
       }
     ]
   },

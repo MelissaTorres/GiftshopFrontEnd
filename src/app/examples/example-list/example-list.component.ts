@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
 
 import { ComponentBase } from '../../common/component-base';
 import { PaginatedResult } from '../../common/models/paginated-result.model';
@@ -7,17 +7,28 @@ import { ExamplesService } from '../services/examples.service';
 import { Example } from '../../common/models/example.model';
 import { MessageBoxService } from '../../core/services/message-box.service';
 import { ErrorHandlerService } from '../../core/services/error-handler.service';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { merge } from 'rxjs';
+import { startWith, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-example-list',
   templateUrl: './example-list.component.html',
   styleUrls: ['./example-list.component.scss']
 })
-export class ExampleListComponent extends ComponentBase implements OnInit, OnDestroy {
+export class ExampleListComponent extends ComponentBase implements AfterViewInit {
+//export class ExampleListComponent extends ComponentBase implements OnInit, OnDestroy {
 
   private _paginatedRequest: PaginatedRequest = {};
   page: PaginatedResult<Example>;
+  dataSource = new MatTableDataSource();
 
+  resultsLength = 0;
+  isLoadingResults = false;
+  isRateLimitReached = false;
+
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: false}) st: MatSort;
 
   constructor(
     private _examplesService: ExamplesService,
@@ -26,9 +37,15 @@ export class ExampleListComponent extends ComponentBase implements OnInit, OnDes
     super();
   }
 
-  ngOnInit() {
+  ngAfterViewInit(): void {
+    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+    //Add 'implements AfterViewInit' to the class.
     this.getPage(1);
   }
+
+  //ngOnInit() {
+  //  this.getPage(1);
+  //}
 
   getPage(page: number) {
     this._paginatedRequest.page = page;
