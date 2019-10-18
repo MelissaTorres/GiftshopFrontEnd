@@ -9,6 +9,7 @@ import { MessageBoxService } from '../../core/services/message-box.service';
 import { ErrorHandlerService } from '../../core/services/error-handler.service';
 import { FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Category } from '../../common/models/category.model';
 
 @Component({
   selector: 'app-productInfo-list',
@@ -20,21 +21,21 @@ export class ProductInfoListComponent extends ComponentBase implements OnInit, O
   private _paginatedRequest: PaginatedRequest = {};
   product: Product;
   page: PaginatedResult<Product>;
+  categoryNames;
+  catName: string;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private router: Router,
     private actRoute: ActivatedRoute,
-    private _productsInfoService: ProductsInfoService,
-    private _messageBox: MessageBoxService,
-    private _errorHandler: ErrorHandlerService) {
+    private _productsInfoService: ProductsInfoService) {
     super();
   }
 
   ngOnInit() {
     this._productsInfoService.get(this.actRoute.snapshot.params.id).subscribe(response => {
       this.product = response;
-    })
+    });
+    this.getCategories();
+    
   }
 
   getPage(page: number) {
@@ -43,5 +44,20 @@ export class ProductInfoListComponent extends ComponentBase implements OnInit, O
       .subscribe(response => {
         this.page = response;
       });
+  }
+
+  getCategories() {
+    this._productsInfoService.getCategories().subscribe(response => {
+      this.categoryNames = response;
+      if(typeof this.categoryNames !== "undefined") {
+        for (let i = 0; i < this.categoryNames.length; i++) {
+          console.log('dasdsads');
+          if (this.product.categoryId == this.categoryNames[i].id) {
+            this.catName = this.categoryNames[i].categoryName;
+            console.log(this.catName);
+          }      
+        }
+      }
+    });
   }
 }

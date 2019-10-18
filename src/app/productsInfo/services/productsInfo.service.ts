@@ -13,12 +13,14 @@ import { Product } from '../../common/models/product.model';
 export class ProductsInfoService {
 
   private readonly _url: string;
+  private readonly _urlCat: string;
 
   constructor(
     private _httpClient: HttpClient,
     @Inject(API_URL) apiUrl: string,
     @Inject(ASSETS_URL) assetsUrl: string) {
     this._url = `${apiUrl}/api/products`;
+    this._urlCat = this._url + `/getCategories`;
   }
 
   getPage(query: PaginatedRequest): Observable<PaginatedResult<Product>> {
@@ -28,5 +30,9 @@ export class ProductsInfoService {
 
   get(id: string): Observable<Product> {
     return this._httpClient.get<Product>(`${this._url}/${id}`);
+  }
+
+  getCategories() {
+    return this._httpClient.get(this._urlCat);
   }
 }
