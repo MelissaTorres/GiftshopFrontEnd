@@ -21,14 +21,6 @@ const routes: Routes = [
     },
     children: [
       {
-        path: 'examples',
-        component: LayoutComponent,
-        loadChildren: './examples/examples.module#ExamplesModule',
-        data: {
-          title: 'examples.$TITLE'
-        }
-      },
-      {
         path: 'productsIndex',
         component: LayoutComponent,
         loadChildren: './productsIndex/productsIndex.module#ProductsIndexModule',

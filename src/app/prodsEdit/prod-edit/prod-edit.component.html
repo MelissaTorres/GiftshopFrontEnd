@@ -36,8 +36,8 @@
     <div class="form-group">
         <label for="categoryId">Select list:</label>
         <select class="form-control" id="categoryId" aria-placeholder="Category Name" formControlName="categoryId">
-            <option *ngFor="let category of categoryNames; let i = index" [value]="categoryNames[i].id" selected={{product.categoryId}}>
-                {{categoryNames[i].categoryName}}
+            <option *ngFor="let category of categoryNames" [value]="category.id">
+                {{category.categoryName}}
             </option>
         </select>
     </div>

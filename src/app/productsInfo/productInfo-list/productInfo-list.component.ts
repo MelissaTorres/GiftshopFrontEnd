@@ -51,7 +51,6 @@ export class ProductInfoListComponent extends ComponentBase implements OnInit, O
       this.categoryNames = response;
       if(typeof this.categoryNames !== "undefined") {
         for (let i = 0; i < this.categoryNames.length; i++) {
-          console.log('dasdsads');
           if (this.product.categoryId == this.categoryNames[i].id) {
             this.catName = this.categoryNames[i].categoryName;
             console.log(this.catName);

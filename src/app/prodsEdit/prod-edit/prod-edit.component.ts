@@ -22,7 +22,8 @@ export class ProdEditComponent extends ComponentBase implements OnInit, OnDestro
     product: Product;
     editForm: FormGroup;
     categoryNames;
-
+    catName: string;
+    
     constructor(
         private formBuilder: FormBuilder,
         private router: Router,
@@ -69,7 +70,15 @@ export class ProdEditComponent extends ComponentBase implements OnInit, OnDestro
 
     getCategories() {
         this._productsService.getCategories().subscribe(response => {
-            this.categoryNames = response;
+          this.categoryNames = response;
+          if(typeof this.categoryNames !== "undefined") {
+            for (let i = 0; i < this.categoryNames.length; i++) {
+              if (this.product.categoryId == this.categoryNames[i].id) {
+                this.catName = this.categoryNames[i].categoryName;
+                console.log(this.catName);
+              }      
+            }
+          }
         });
     }
 }

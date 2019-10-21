@@ -9,13 +9,13 @@
   name="search" [(ngModel)]="productName" autocomplete="off" placeholder="Search by product name"
   (input)="search()">
   <div class="input-group-append">
-      <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">Category</button>
-      <div class="dropdown-menu">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-      </div>
+      <select class="form-control btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false" name="id" [(ngModel)]="cat.id" (ngModelChange)="searchCategory()">
+          <option value="" selected>All Categories</option>
+          <option *ngFor="let category of categoryNames"  [ngValue]="category.id">
+              {{category.categoryName}}
+          </option>
+        </select>
   </div>
 </div>
 <app-panel [loading]="loading">
@@ -53,7 +53,7 @@
       <tfoot>
         <tr>
           <td colspan="6">
-            <app-pagination [page]="page" (pageChange)="getPage($event)"></app-pagination>
+            <app-pagination [page]="page" (pageChange)="getCategoriesPage($event)"></app-pagination>
           </td>
         </tr>
       </tfoot>

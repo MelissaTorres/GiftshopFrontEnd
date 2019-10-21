@@ -1,15 +1,15 @@
 <div class="input-group mb-3">
-    <input type="text" class="form-control" aria-label="Text input with dropdown button"
-    name="search" [(ngModel)]="productName" autocomplete="off" placeholder="Search by product name"
-    (input)="search()">
+    <input type="text" class="form-control" aria-label="Text input with dropdown button" name="search"
+        [(ngModel)]="productName" autocomplete="off" placeholder="Search by product name" (input)="search()">
     <div class="input-group-append">
-        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">Category</button>
-        <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
-        </div>
+        <select class="form-control btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false" name="id" [(ngModel)]="cat.id"
+            (ngModelChange)="searchCategory()">
+            <option value="" selected>All Categories</option>
+            <option *ngFor="let category of categoryNames" [ngValue]="category.id">
+                {{category.categoryName}}
+            </option>
+        </select>
     </div>
 </div>
 <app-panel [loading]="loading">

@@ -8,6 +8,9 @@ import { ProductsService } from '../services/products.service';
 import { Product } from '../../common/models/product.model';
 import { MessageBoxService } from '../../core/services/message-box.service';
 import { ErrorHandlerService } from '../../core/services/error-handler.service';
+import { FormBuilder } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Category } from '../../common/models/category.model';
 
 @Component({
   selector: 'app-product-list',
@@ -19,8 +22,13 @@ export class ProductListComponent extends ComponentBase implements OnInit, OnDes
   private _paginatedRequest: PaginatedRequest = {};
   page: PaginatedResult<Product>;
   productName: string;
+  cat: Category = new Category();
+  categoryNames;
 
   constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private actRoute: ActivatedRoute,
     private _productsService: ProductsService,
     private _messageBox: MessageBoxService,
     private _errorHandler: ErrorHandlerService) {
@@ -29,6 +37,7 @@ export class ProductListComponent extends ComponentBase implements OnInit, OnDes
 
   ngOnInit() {
     this.getPage(1);
+    this.getCategories();
   }
 
   getPage(page: number) {
@@ -63,5 +72,29 @@ export class ProductListComponent extends ComponentBase implements OnInit, OnDes
         this.page = response;
         this.getPage(1);
       })
+  }
+
+  getCategories() {
+    this._productsService.getCategories().subscribe(response => {
+      this.categoryNames = response;
+    });
+  }
+
+  getCategoriesPage(page: number) {
+    this._paginatedRequest.page = page;
+    this.registerRequest(this._productsService.getCategoriesPage(this._paginatedRequest))
+      .subscribe(response => {
+        this.page = response;
+      });
+  }
+
+  searchCategory() {
+    console.log(this.cat.id);
+    this._paginatedRequest.term = this.cat.id;
+    this.registerRequest(this._productsService.getCategoriesPage(this._paginatedRequest))
+    .subscribe(response => {
+      this.page = response;
+      this.getCategoriesPage(1);
+    })
   }
 }
