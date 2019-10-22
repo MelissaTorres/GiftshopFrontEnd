@@ -89,7 +89,7 @@ export class ProductListComponent extends ComponentBase implements OnInit, OnDes
   }
 
   searchCategory() {
-    console.log(this.cat.id);
+    //console.log(this.cat.id);
     this._paginatedRequest.term = this.cat.id;
     this.registerRequest(this._productsService.getCategoriesPage(this._paginatedRequest))
     .subscribe(response => {
